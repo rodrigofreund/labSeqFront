@@ -1,13 +1,13 @@
 <form class="">
     <div class="form-group">
-        <label for="number">Number</label>
+        <label for="number">Put a positive integer and press enter to compute labseq.</label>
         <input type="number" class="form-control" id="number" name="number" [(ngModel)]="valueToCompute"
-            aria-describedby="numberHelp" placeholder="Enter number">
-        <small id="numberHelp" class="form-text text-muted">Insert an integer value to compute labseq.</small>
+            aria-describedby="numberHelp" placeholder="Enter number" required="true" (keyup.enter)="compute()">
+        <small id="numberHelp" class="form-text text-muted" *ngIf="checkParameter">Insert an integer value to compute labseq.</small>
     </div>
     <div class="form-group">
         <label for="result">Result</label>
-        <input type="result" class="form-control" id="result" name="result" [ngModel]="valueComputed" disabled="true">
+        <input type="text" class="form-control" id="result" name="result" [ngModel]="valueComputed" disabled="true">
         <small id="stopedHelp" class="form-text text-muted" *ngIf="isFetching">Processing...</small>
     </div>
     <div class="col-12">

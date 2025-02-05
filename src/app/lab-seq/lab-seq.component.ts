@@ -14,9 +14,11 @@ export class LabSeqComponent implements OnInit, OnDestroy {
   valueToCompute: any;
   valueComputed: any;
   isFetching: boolean;
+  checkParameter: boolean;
 
   constructor(private labSeqService: LabSeqService) {
     this.isFetching = false;
+    this.checkParameter = false;
    }
 
   ngOnInit(): void {
@@ -27,13 +29,19 @@ export class LabSeqComponent implements OnInit, OnDestroy {
   }
 
   compute() {
-    this.isFetching = true;
-    this.valueComputed = this.labSeqService.computeSequence(this.valueToCompute);
+    if(!this.valueToCompute || this.valueToCompute < 0)
+      this.checkParameter = true;
+    else {
+      this.isFetching = true;
+      this.checkParameter = false;
+      this.valueComputed = this.labSeqService.computeSequence(this.valueToCompute);
+    }
   }
 
   reset() {
     this.valueComputed = undefined;
     this.valueToCompute = undefined;
+    this.checkParameter = false;
   }
 
   ngOnDestroy(): void {

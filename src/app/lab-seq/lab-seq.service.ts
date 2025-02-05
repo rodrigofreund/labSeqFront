@@ -12,7 +12,7 @@ export class LabSeqService {
     }
 
     private callServiceToCompute(value: number) {
-        this.httpClient.get<any>(`http://localhost:8080/labseq/${value}`).subscribe(resp => {
+        this.httpClient.get<string>(`http://localhost:8080/labseq/${value}`).subscribe(resp => {
             this.valueChanged.next(resp);
         });
     }
